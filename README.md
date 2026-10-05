@@ -78,8 +78,6 @@ The codebase is organized as follows:
 │   ├── model_selection.py    # Elbow selection of k_nn and k
 │   ├── metrics.py            # Price of fairness, silhouette, substantive clusters
 │   └── data.py               # Loading / cleaning of Diabetes, UCI Census and Bank Marketing
-├── notebooks/
-│   └── fair_parpic.ipynb     # Original development notebook (exact MILP solver, n = 10,000)
 ├── data/
 │   └── README.md             # Where to download the three datasets
 └── assets/images/            # Figures used in this README
@@ -221,22 +219,6 @@ With small groups ($G \ge 4$), unconstrained clustering leaves at least one clus
 
 > ![Effect of the number of groups](assets/images/sensitivity_groups.png)
 
-<!--## 📜 Citation
 
-If you find this code useful in your research, please consider citing our paper:
 
-```bibtex
-@inproceedings{fairparpic2027,
-  title={Fair ParPIC: Fair Power-Iteration Clustering on Directed Graphs},
-  author={Anonymous},
-  booktitle={Submitted to the International Conference on Artificial Intelligence and Statistics (AISTATS)},
-  year={2027}
-}
-```
--->
 
-## 📜 Citation
-
-The paper is currently under double-blind review; citation details will be added after the review process.
-
-This work builds on ParPIC: G. Debaussart-Joniec, H. Sevi, M. Jonckheere and A. Kalogeratos, *Parametrized Power-Iteration Clustering for Directed Graphs*, ICML 2026 (arXiv:2210.00310).
