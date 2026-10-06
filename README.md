@@ -42,9 +42,9 @@ Below is the full pipeline on a small synthetic example ($n = 180$, $k = 3$, $G 
 
 > ![Fair ParPIC pipeline](assets/images/pipeline.png)
 
-**The balance certificate (Theorem 3):** every clustering returned by Fair ParPIC satisfies
+**The balance certificate (Theorem 3):** Every clustering returned by Fair ParPIC satisfies
 
-$$ (1-\delta)\,\alpha_{\min} \;\le\; \mathrm{balance}(C) = \min_{c}\min_{g}\, r_g(C_c) \;\le\; \alpha_{\min}, $$
+$$ (1-\delta) \alpha_{\min} \;\le\; \mathrm{balance}(C) = \min_{c}\min_{g}\, r_g(C_c) \;\le\; \alpha_{\min}, $$
 
 *(where $\alpha_{\min}$ is the smallest group proportion and $\delta$ the user-set tolerance; the upper bound holds for every clustering (Lemma 5), so the guarantee is within a factor $1-\delta$ of the best achievable balance)*.
 
