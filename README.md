@@ -61,16 +61,11 @@ The codebase is organized as follows:
 ├── README.md
 ├── requirements.txt
 ├── main_pipeline.py          # Real-data experiment (Tables 2 and 3 of the paper)
-├── experiment_synthetic.py   # Synthetic directed networks (Appendix E.2, Table S2)
 ├── run_all.sh                # Runs the full experimental pipeline
-├── experiments/              # Appendix experiments (self-contained scripts, see experiments/README.md)
-│   ├── experiment_scale.py           # Stage 1 on the full datasets (Table S1)
-│   ├── experiment_spectrum.py        # Theorems 1-2 on the full spectra (Table S3)
-│   ├── experiment_diffusion_time.py  # Behavior across diffusion times (Fig. S1)
-│   ├── experiment_delta.py           # Fairness tolerance delta (Fig. S2)
-│   ├── experiment_k_knn.py           # Number of clusters k and neighbors k_nn (Figs. S3, S4)
-│   ├── experiment_gamma.py           # Vertex-measure parameter gamma (Fig. S5)
-│   └── experiment_groups.py          # Number of protected groups (Fig. S6, Table S4)
+├── data/              # datasets
+│   ├── diabetic_data.csv          
+│   ├── bank-full.csv       
+│   ├── uci_cencus.csv  
 ├── src/
 │   ├── fair_parpic.py        # FairParPIC estimator; ParPIC / FP-ParPIC embeddings
 │   ├── parpic.py             # k_nn-NN digraph, P-RW operator and pi_(nu), entropy-based diffusion time
@@ -78,12 +73,7 @@ The codebase is organized as follows:
 │   ├── fair_assignment.py    # Fair assignment (P_delta): decomposition & MILP solvers, fair k-means
 │   ├── model_selection.py    # Elbow selection of k_nn and k
 │   ├── metrics.py            # Price of fairness, silhouette, substantive clusters
-│   └── data.py               # Loading / cleaning of Diabetes, UCI Census and Bank Marketing
-├── notebooks/
-│   └── fair_parpic.ipynb     # Original development notebook (earlier version with the Euclidean
-│                             #   projector; superseded by src/, kept for reference)
-├── data/
-│   └── README.md             # Where to download the three datasets
+│   └── data.py               # Loading / cleaning of Diabetes, UCI Census and Bank Marketing                           
 └── assets/
     ├── figures/              # The paper's figures (vector PDF)
     └── images/               # PNG renderings used in this README
