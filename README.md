@@ -29,7 +29,7 @@ Fair ParPIC works as follows:
 
 $$ Z^{(\tau)} = \Pi_\pi\, P_{(\nu)}\, Z^{(\tau-1)}, \qquad \Pi_\pi = I_n - D_\pi^{-1}F\big(F^\top D_\pi^{-1}F\big)^{-1}F^\top, \qquad \tau = 1,\dots,t^\star .$$
 
-   This enforces $F^\top Z = 0$ exactly at every iterate, i.e. **centroid parity**: all groups have the same mean in the embedding.
+   This enforces $F^\top Z = 0$ exactly at every iterate, i.e., **centroid parity**: all groups have the same mean in the embedding.
 
 5. **Stage 2 — Fair assignment.** Centroid parity does *not* imply balanced clusters (fairness can be lost in the final $k$-means step), so $k$-means is replaced by an alternating fair assignment that, for fixed centers $\mu_c$, solves
 
@@ -41,12 +41,6 @@ $$ (\mathrm{P}_\delta):\ \min_{x \in \{0,1\}^{n\times k}} J(x,\mu) = \sum_{i,c} 
 Below is the full pipeline on a small synthetic example ($n = 180$, $k = 3$, $G = 2$, $\delta = 0.05$): the projection makes the group centroids coincide, $k$-means on the projected embedding still yields group shares outside the allowed range, and the fair assignment brings every cluster into it.
 
 > ![Fair ParPIC pipeline](assets/images/pipeline.png)
-
-**The balance certificate (Theorem 3):** Every clustering returned by Fair ParPIC satisfies
-
-$$ (1-\delta) \alpha_{\min} \;\le\; \mathrm{balance}(C) = \min_{c}\min_{g}\, r_g(C_c) \;\le\; \alpha_{\min}, $$
-
-*(where $\alpha_{\min}$ is the smallest group proportion and $\delta$ the user-set tolerance; the upper bound holds for every clustering (Lemma 5), so the guarantee is within a factor $1-\delta$ of the best achievable balance)*.
 
 ## Key Contributions
 
