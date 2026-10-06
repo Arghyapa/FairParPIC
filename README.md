@@ -12,7 +12,6 @@ Fair ParPIC is a two-stage fair clustering method for **directed graphs** with p
 * [Usage](#-usage)
 * [Experimental Results](#-experimental-results)
 * [Sensitivity Analysis](#-sensitivity-analysis)
-* [Citation](#-citation)
 
 ## 🔬 Overview
 
@@ -243,21 +242,6 @@ With small groups ($G \ge 4$), unconstrained clustering leaves at least one clus
 
 > ![Effect of the number of groups](assets/images/sensitivity_groups.png)
 
-<!--## 📜 Citation
-
-If you find this code useful in your research, please consider citing our paper:
-
-```bibtex
-@inproceedings{fairparpic2027,
-  title={Fair ParPIC: Fair Power-Iteration Clustering on Directed Graphs},
-  author={Anonymous},
-  booktitle={Submitted to the International Conference on Artificial Intelligence and Statistics (AISTATS)},
-  year={2027}
-}
-```
--->
-
-## 📜 Citation
 
 The paper is currently under double-blind review; citation details will be added after the review process.
 
