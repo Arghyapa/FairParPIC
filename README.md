@@ -139,7 +139,7 @@ The vertex-measure parameter must satisfy $0 \le \gamma < 1$: at $\gamma = 1$ th
 
 ## Experimental Results
 
-Fair ParPIC was compared with PIC, AdaPIC, the Fair p-Assignment of Bera et al., FairSC, FairDen, unconstrained ParPIC and its Stage 1 alone (FP-ParPIC, i.e. Stage 1 followed by $k$-means) on three real datasets ($n = 3{,}000$ stratified subsamples, $k = 7$, $\delta = 0.05$, mean ± standard deviation over five seeds).
+Fair ParPIC was compared with PIC, AdaPIC, the Fair p-Assignment of Bera et al., FairSC, FairDen, unconstrained ParPIC and its Stage 1 alone (FP-ParPIC, i.e. Stage 1 followed by $k$-means) on three real datasets ($n = 3000$ stratified subsamples, $k = 7$, $\delta = 0.05$, mean ± standard deviation over five seeds).
 
 ### Real-World Datasets
 
