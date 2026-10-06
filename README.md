@@ -1,6 +1,6 @@
 # Fair Parametrized Power-Iteration Clustering (Fair ParPIC)
 
-This repository contains the official Python implementation of **Fair ParPIC: Fair Power-Iteration Clustering on Directed Graphs**.
+This repository contains the official Python implementation of **Fair ParPIC: Fair Parametrized Power-Iteration Clustering on Directed Graphs**.
 
 Fair ParPIC is a two-stage fair clustering method for **directed graphs** with provable guarantees. It builds on Parametrized Power-Iteration Clustering (ParPIC), which clusters a digraph by power iteration of a reversible random walk parametrized by a vertex measure, without symmetrizing the graph and without any eigendecomposition. Fair ParPIC makes this pipeline fair with respect to a sensitive attribute (gender, marital status, race, ...) and **certifies** the balance of every cluster it returns.
 
