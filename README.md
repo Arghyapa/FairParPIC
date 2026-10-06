@@ -4,7 +4,7 @@ This repository contains the official Python implementation of **Fair ParPIC: Fa
 
 Fair ParPIC is a two-stage fair clustering method for **directed graphs** with provable guarantees. It builds on Parametrized Power-Iteration Clustering (ParPIC), which clusters a digraph by power iteration of a reversible random walk parametrized by a vertex measure, without symmetrizing the graph and without any eigendecomposition. Fair ParPIC makes this pipeline fair with respect to a sensitive attribute (gender, marital status, race, ...) and **certifies** the balance of every cluster it returns.
 
-## 📖 Table of Contents
+## Table of Contents
 * [Overview](#-overview)
 * [Key Contributions](#-key-contributions)
 * [Repository Structure](#-repository-structure)
@@ -13,7 +13,7 @@ Fair ParPIC is a two-stage fair clustering method for **directed graphs** with p
 * [Experimental Results](#-experimental-results)
 * [Sensitivity Analysis](#-sensitivity-analysis)
 
-## 🔬 Overview
+## Overview
 
 Unconstrained clustering has no incentive to avoid clusters composed almost entirely of one group whenever group membership is correlated with the similarity structure. Fair spectral methods address this on **undirected** graphs, but many similarity graphs are naturally **directed** (in a $k_{\mathrm{nn}}$-NN graph, "$j$ is among $i$'s nearest neighbors" is not symmetric; citations and hyperlinks are directed by nature).
 
@@ -48,7 +48,7 @@ $$ (1-\delta)\,\alpha_{\min} \;\le\; \mathrm{balance}(C) = \min_{c}\min_{g}\, r_
 
 *(where $\alpha_{\min}$ is the smallest group proportion and $\delta$ the user-set tolerance; the upper bound holds for every clustering (Lemma 5), so the guarantee is within a factor $1-\delta$ of the best achievable balance)*.
 
-## ✨ Key Contributions
+## Key Contributions
 
 * **Fairness inside an eigendecomposition-free iteration:** the $\pi$-orthogonal projection is applied at every power-iteration step and the iterates satisfy $F^\top Z = 0$ to machine precision (Proposition 1). They form a power iteration of $T_\pi = \Pi_\pi P_{(\nu)}|_{\mathcal{N}_F}$, a self-adjoint compression of $P_{(\nu)}$ whose spectrum interlaces that of $P_{(\nu)}$ (Theorem 1), so the diffusion geometry is preserved and ParPIC's diffusion time can be reused (Theorem 2).
 
@@ -58,7 +58,7 @@ $$ (1-\delta)\,\alpha_{\min} \;\le\; \mathrm{balance}(C) = \min_{c}\min_{g}\, r_
 
 * **Fairness made cheaper:** the projection lowers the *price of fairness* (relative increase in within-cluster sum of squares) of the exact assignment, e.g. from 2.1% to 0.8% on Bank Marketing.
 
-## 📂 Repository Structure
+## Repository Structure
 
 The codebase is organized as follows:
 
