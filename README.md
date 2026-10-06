@@ -1,10 +1,10 @@
 # Fair Parametrized Power-Iteration Clustering (Fair ParPIC)
 
-This repository contains the official Python implementation of **Fair ParPIC: Fair Power-Iteration Clustering on Directed Graphs**.
+This repository contains the official Python implementation of **Fair ParPIC: Fair Power-Iteration Clustering on Directed Graphs** (under review at AISTATS 2027).
 
 Fair ParPIC is a two-stage fair clustering method for **directed graphs** with provable guarantees. It builds on Parametrized Power-Iteration Clustering (ParPIC), which clusters a digraph by power iteration of a reversible random walk parametrized by a vertex measure, without symmetrizing the graph and without any eigendecomposition. Fair ParPIC makes this pipeline fair with respect to a sensitive attribute (gender, marital status, race, ...) and **certifies** the balance of every cluster it returns.
 
-## Table of Contents
+## 📖 Table of Contents
 * [Overview](#-overview)
 * [Key Contributions](#-key-contributions)
 * [Repository Structure](#-repository-structure)
@@ -12,8 +12,9 @@ Fair ParPIC is a two-stage fair clustering method for **directed graphs** with p
 * [Usage](#-usage)
 * [Experimental Results](#-experimental-results)
 * [Sensitivity Analysis](#-sensitivity-analysis)
+* [Citation](#-citation)
 
-## Overview
+## 🔬 Overview
 
 Unconstrained clustering has no incentive to avoid clusters composed almost entirely of one group whenever group membership is correlated with the similarity structure. Fair spectral methods address this on **undirected** graphs, but many similarity graphs are naturally **directed** (in a $k_{\mathrm{nn}}$-NN graph, "$j$ is among $i$'s nearest neighbors" is not symmetric; citations and hyperlinks are directed by nature).
 
@@ -29,7 +30,7 @@ Fair ParPIC works as follows:
 
 $$ Z^{(\tau)} = \Pi_\pi\, P_{(\nu)}\, Z^{(\tau-1)}, \qquad \Pi_\pi = I_n - D_\pi^{-1}F\big(F^\top D_\pi^{-1}F\big)^{-1}F^\top, \qquad \tau = 1,\dots,t^\star .$$
 
-   This enforces $F^\top Z = 0$ exactly at every iterate, i.e., **centroid parity**: all groups have the same mean in the embedding.
+   This enforces $F^\top Z = 0$ exactly at every iterate, i.e. **centroid parity**: all groups have the same mean in the embedding.
 
 5. **Stage 2 — Fair assignment.** Centroid parity does *not* imply balanced clusters (fairness can be lost in the final $k$-means step), so $k$-means is replaced by an alternating fair assignment that, for fixed centers $\mu_c$, solves
 
@@ -42,7 +43,13 @@ Below is the full pipeline on a small synthetic example ($n = 180$, $k = 3$, $G 
 
 > ![Fair ParPIC pipeline](assets/images/pipeline.png)
 
-## Key Contributions
+**The balance certificate (Theorem 3):** every clustering returned by Fair ParPIC satisfies
+
+$$ (1-\delta)\,\alpha_{\min} \;\le\; \mathrm{balance}(C) = \min_{c}\min_{g}\, r_g(C_c) \;\le\; \alpha_{\min}, $$
+
+*(where $\alpha_{\min}$ is the smallest group proportion and $\delta$ the user-set tolerance; the upper bound holds for every clustering (Lemma 5), so the guarantee is within a factor $1-\delta$ of the best achievable balance)*.
+
+## ✨ Key Contributions
 
 * **Fairness inside an eigendecomposition-free iteration:** the $\pi$-orthogonal projection is applied at every power-iteration step and the iterates satisfy $F^\top Z = 0$ to machine precision (Proposition 1). They form a power iteration of $T_\pi = \Pi_\pi P_{(\nu)}|_{\mathcal{N}_F}$, a self-adjoint compression of $P_{(\nu)}$ whose spectrum interlaces that of $P_{(\nu)}$ (Theorem 1), so the diffusion geometry is preserved and ParPIC's diffusion time can be reused (Theorem 2).
 
@@ -52,7 +59,7 @@ Below is the full pipeline on a small synthetic example ($n = 180$, $k = 3$, $G 
 
 * **Fairness made cheaper:** the projection lowers the *price of fairness* (relative increase in within-cluster sum of squares) of the exact assignment, e.g. from 2.1% to 0.8% on Bank Marketing.
 
-## Repository Structure
+## 📂 Repository Structure
 
 The codebase is organized as follows:
 
@@ -63,6 +70,14 @@ The codebase is organized as follows:
 ├── main_pipeline.py          # Real-data experiment (Tables 2 and 3 of the paper)
 ├── experiment_synthetic.py   # Synthetic directed networks (Appendix E.2, Table S2)
 ├── run_all.sh                # Runs the full experimental pipeline
+├── experiments/              # Appendix experiments (self-contained scripts, see experiments/README.md)
+│   ├── experiment_scale.py           # Stage 1 on the full datasets (Table S1)
+│   ├── experiment_spectrum.py        # Theorems 1-2 on the full spectra (Table S3)
+│   ├── experiment_diffusion_time.py  # Behavior across diffusion times (Fig. S1)
+│   ├── experiment_delta.py           # Fairness tolerance delta (Fig. S2)
+│   ├── experiment_k_knn.py           # Number of clusters k and neighbors k_nn (Figs. S3, S4)
+│   ├── experiment_gamma.py           # Vertex-measure parameter gamma (Fig. S5)
+│   └── experiment_groups.py          # Number of protected groups (Fig. S6, Table S4)
 ├── src/
 │   ├── fair_parpic.py        # FairParPIC estimator; ParPIC / FP-ParPIC embeddings
 │   ├── parpic.py             # k_nn-NN digraph, P-RW operator and pi_(nu), entropy-based diffusion time
@@ -76,7 +91,9 @@ The codebase is organized as follows:
 │                             #   projector; superseded by src/, kept for reference)
 ├── data/
 │   └── README.md             # Where to download the three datasets
-└── assets/images/            # Figures used in this README (taken from the paper)
+└── assets/
+    ├── figures/              # The paper's figures (vector PDF)
+    └── images/               # PNG renderings used in this README
 ```
 
 ## ⚙️ Installation
@@ -89,7 +106,7 @@ cd FairParPIC
 pip install -r requirements.txt
 ```
 
-The only dependencies are NumPy, SciPy (≥ 1.9, whose `milp` wraps the HiGHS solver), scikit-learn and pandas. Download the three real datasets into `data/` as described in [`data/README.md`](data/README.md).
+The dependencies are NumPy, SciPy (≥ 1.9, whose `milp` wraps the HiGHS solver), scikit-learn and pandas, plus Matplotlib for the figures of the appendix experiments. Download the three real datasets into `data/` as described in [`data/README.md`](data/README.md).
 
 ## 🚀 Usage
 
@@ -111,6 +128,14 @@ python main_pipeline.py --dataset bank --delta 0.1 --solver milp     # other tol
 ```bash
 python experiment_synthetic.py
 TYPES=A LEVELS=none,strong python experiment_synthetic.py
+```
+
+**Reproduce the appendix experiments** (Tables S1 and S3, Figs. S1–S6; see [`experiments/README.md`](experiments/README.md)):
+
+```bash
+python experiments/experiment_delta.py                    # Fig. S2 -> results/, figures/
+DATASET=Diabetes python experiments/experiment_gamma.py   # one dataset only
+python experiments/experiment_scale.py Census             # Table S1, one dataset
 ```
 
 **Use Fair ParPIC on your own data:**
@@ -165,7 +190,7 @@ Fair ParPIC was compared with PIC, AdaPIC, the Fair p-Assignment of Bera et al.,
 
 ### Stage 1 at Larger Scale
 
-Stage 1 uses only sparse products and a rank-$(G-1)$ correction, so it runs on the full datasets (Appendix E.1 of the paper: $k_{\mathrm{nn}} = 10$, $k = 10$, $k$-means discretization, seed 42, $t^\star = 10$ on all three):
+Stage 1 uses only sparse products and a rank-$(G-1)$ correction, so it runs on the full datasets (Appendix E.1, `experiments/experiment_scale.py`: $k_{\mathrm{nn}} = 10$, $k = 10$, $k$-means discretization, seed 42, $t^\star = 10$ on all three):
 
 | Dataset | $n$ | ParPIC balance | FP-ParPIC balance | $\max_{i,j}\lvert(F^\top Z)_{ij}\rvert$: ParPIC → FP-ParPIC | Time (s): ParPIC → FP-ParPIC |
 |---|:---:|:---:|:---:|:---:|:---:|
@@ -198,13 +223,13 @@ Fair ParPIC meets its guarantee on all twelve networks; ParPIC reaches the floor
 
 ### Diffusion Time
 
-The diffusion time $t^\star$ is selected by ParPIC's entropy criterion on the unprojected operator $P_{(\nu)}$, so it does not depend on the sensitive attribute; by Theorem 2 the projected diffusion loses modes on the same time scale. Across diffusion times (Appendix E.3, $k = 7$, $\delta = 0.05$), Fair ParPIC stays between floor and ceiling at every $t$, and the price of fairness is small up to $t^\star$ (dotted line) and grows only with over-diffusion; the projection lowers it in 24 of the 30 settings.
+The diffusion time $t^\star$ is selected by ParPIC's entropy criterion on the unprojected operator $P_{(\nu)}$, so it does not depend on the sensitive attribute; by Theorem 2 the projected diffusion loses modes on the same time scale. Across diffusion times (Appendix E.3, `experiments/experiment_diffusion_time.py`; $k = 7$, $\delta = 0.05$), Fair ParPIC stays between floor and ceiling at every $t$, and the price of fairness is small up to $t^\star$ (dotted line) and grows only with over-diffusion; the projection lowers it in 24 of the 30 settings.
 
 > ![Effect of the diffusion time](assets/images/diffusion_time.png)
 
 ## 🔬 Sensitivity Analysis
 
-Each hyperparameter is varied one at a time ($n = 3{,}000$, seed 42; Appendix E.4). In every figure, the **top row** shows the balance of Fair ParPIC (blue) and unconstrained ParPIC with $k$-means (orange) against the floor (dotted) and ceiling (solid), and the **bottom row** shows the price of fairness with (green) and without (red) the projection. All 176 fair-assignment runs met the floor, and for $\gamma < 1$ the projection lowered the price of fairness in 69 of the 78 settings where the two prices differ.
+Each hyperparameter is varied one at a time ($n = 3{,}000$, seed 42; Appendix E.4; scripts in [`experiments/`](experiments/)). In every figure, the **top row** shows the balance of Fair ParPIC (blue) and unconstrained ParPIC with $k$-means (orange) against the floor (dotted) and ceiling (solid), and the **bottom row** shows the price of fairness with (green) and without (red) the projection. All 176 fair-assignment runs met the floor, and for $\gamma < 1$ the projection lowered the price of fairness in 69 of the 78 settings where the two prices differ.
 
 ### 1. Fairness tolerance $\delta$
 
@@ -236,6 +261,21 @@ With small groups ($G \ge 4$), unconstrained clustering leaves at least one clus
 
 > ![Effect of the number of groups](assets/images/sensitivity_groups.png)
 
+<!--## 📜 Citation
+
+If you find this code useful in your research, please consider citing our paper:
+
+```bibtex
+@inproceedings{fairparpic2027,
+  title={Fair ParPIC: Fair Power-Iteration Clustering on Directed Graphs},
+  author={Anonymous},
+  booktitle={Submitted to the International Conference on Artificial Intelligence and Statistics (AISTATS)},
+  year={2027}
+}
+```
+-->
+
+## 📜 Citation
 
 The paper is currently under double-blind review; citation details will be added after the review process.
 
