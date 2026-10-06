@@ -153,8 +153,6 @@ Fair ParPIC was compared with PIC, AdaPIC, the Fair p-Assignment of Bera et al.,
 | ParPIC | 0.396 ± 0.052 | 6.6 | 0.130 ± 0.065 | 6.0 | 0.074 ± 0.011 | 6.8 |
 | FP-ParPIC (Stage 1) | 0.398 ± 0.053 | 6.6 | 0.130 ± 0.065 | 6.2 | 0.077 ± 0.023 | 7.0 |
 | **Fair ParPIC** | **0.445 ± 0.007** | 6.6 | **0.315 ± 0.001** | 6.4 | **0.110 ± 0.000** | 7.0 |
-| *Guaranteed floor $(1-\delta)\alpha_{\min}$* | *0.439* | | *0.315* | | *0.109* | |
-| *Ceiling $\alpha_{\min}$* | *0.462* | | *0.332* | | *0.115* | |
 
 *Balance (higher is better); Cl. is the mean number of the $k = 7$ clusters holding at least 1% of the vertices.* Fair ParPIC attains balance within 5% of the best achievable value on every dataset and seed, with at least as many substantive clusters as ParPIC. FP-ParPIC is as unbalanced as ParPIC: the discretization gap, not the embedding, limits the balance.
 
