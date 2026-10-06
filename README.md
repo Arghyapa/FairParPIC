@@ -13,7 +13,7 @@ Fair ParPIC is a two-stage fair clustering method for **directed graphs** with p
 * [Experimental Results](#-experimental-results)
 * [Sensitivity Analysis](#-sensitivity-analysis)
 
-## 🔬 Overview
+## Overview
 
 Unconstrained clustering has no incentive to avoid clusters composed almost entirely of one group whenever group membership is correlated with the similarity structure. Fair spectral methods address this on **undirected** graphs, but many similarity graphs are naturally **directed** (in a $k_{\mathrm{nn}}$-NN graph, "$j$ is among $i$'s nearest neighbors" is not symmetric; citations and hyperlinks are directed by nature).
 
@@ -48,7 +48,7 @@ $$ (1-\delta)\,\alpha_{\min} \;\le\; \mathrm{balance}(C) = \min_{c}\min_{g}\, r_
 
 *(where $\alpha_{\min}$ is the smallest group proportion and $\delta$ the user-set tolerance; the upper bound holds for every clustering (Lemma 5), so the guarantee is within a factor $1-\delta$ of the best achievable balance)*.
 
-## ✨ Key Contributions
+## Key Contributions
 
 * **Fairness inside an eigendecomposition-free iteration:** the $\pi$-orthogonal projection is applied at every power-iteration step and the iterates satisfy $F^\top Z = 0$ to machine precision (Proposition 1). They form a power iteration of $T_\pi = \Pi_\pi P_{(\nu)}|_{\mathcal{N}_F}$, a self-adjoint compression of $P_{(\nu)}$ whose spectrum interlaces that of $P_{(\nu)}$ (Theorem 1), so the diffusion geometry is preserved and ParPIC's diffusion time can be reused (Theorem 2).
 
@@ -58,7 +58,7 @@ $$ (1-\delta)\,\alpha_{\min} \;\le\; \mathrm{balance}(C) = \min_{c}\min_{g}\, r_
 
 * **Fairness made cheaper:** the projection lowers the *price of fairness* (relative increase in within-cluster sum of squares) of the exact assignment, e.g. from 2.1% to 0.8% on Bank Marketing.
 
-## 📂 Repository Structure
+## Repository Structure
 
 The codebase is organized as follows:
 
@@ -95,7 +95,7 @@ The codebase is organized as follows:
     └── images/               # PNG renderings used in this README
 ```
 
-## ⚙️ Installation
+## Installation
 
 To run the pipeline, ensure you have Python ≥ 3.9 installed along with the required dependencies. We recommend setting up a virtual environment.
 
@@ -107,7 +107,7 @@ pip install -r requirements.txt
 
 The dependencies are NumPy, SciPy (≥ 1.9, whose `milp` wraps the HiGHS solver), scikit-learn and pandas, plus Matplotlib for the figures of the appendix experiments. Download the three real datasets into `data/` as described in [`data/README.md`](data/README.md).
 
-## 🚀 Usage
+## Usage
 
 **Run the full experimental pipeline:**
 
@@ -153,7 +153,7 @@ labels = FairParPIC(n_clusters=5).fit_predict(adjacency=W, sensitive=s)
 
 The vertex-measure parameter must satisfy $0 \le \gamma < 1$: at $\gamma = 1$ the vertex measure vanishes on some vertices and the projection degenerates, so `FairParPIC` rejects it. If no clustering can satisfy the share bounds, `InfeasibleFairnessError` is raised instead of silently returning an unfair clustering. Feasibility requires every group to have at least $k$ members (Proposition 2), but this is not sufficient for very small intersectional groups (Remark S2); use a larger $\delta$ or a smaller $k$ in that case.
 
-## 📊 Experimental Results
+## Experimental Results
 
 Fair ParPIC was compared with PIC, AdaPIC, the Fair p-Assignment of Bera et al., FairSC, FairDen, unconstrained ParPIC and its Stage 1 alone (FP-ParPIC, i.e. Stage 1 followed by $k$-means) on three real datasets ($n = 3{,}000$ stratified subsamples, $k = 7$, $\delta = 0.05$, mean ± standard deviation over five seeds).
 
@@ -187,7 +187,7 @@ Fair ParPIC was compared with PIC, AdaPIC, the Fair p-Assignment of Bera et al.,
 
 *ParPIC + FA is the ablation that runs the same fair assignment on the unprojected embedding; PoF is measured against $k$-means on the same embedding.*
 
-### Stage 1 at Larger Scale
+### Stage 1 at a Larger Scale
 
 Stage 1 uses only sparse products and a rank-$(G-1)$ correction, so it runs on the full datasets (Appendix E.1, `experiments/experiment_scale.py`: $k_{\mathrm{nn}} = 10$, $k = 10$, $k$-means discretization, seed 42, $t^\star = 10$ on all three):
 
@@ -218,7 +218,7 @@ The invariant $F^\top Z = 0$ holds to machine precision on graphs with up to 70,
 | | 0.6 | 0.0000 | 0.1517 | **0.2853** | 0.546 | 0.999 | 0.848 |
 | | 0.9 | 0.0000 | 0.1237 | **0.2853** | 0.330 | 0.967 | 0.833 |
 
-Fair ParPIC meets its guarantee on all twelve networks; ParPIC reaches the floor on only two. A moderate group signal is removed by the projection alone (citation, $\eta = 0.6$: ARI 0.396 → 0.912). On the hyperlink networks the planted clustering is itself unfair (balance 0.150), so reaching the floor necessarily moves vertices away from it. The price of fairness of Stage 2 is at most 3.7% over the twelve networks.
+Fair ParPIC meets its guarantee on all twelve networks; ParPIC reaches the floor on only two. A moderate group signal is removed by the projection alone (citation, $\eta = 0.6$: ARI 0.396 → 0.912). On the hyperlink networks, the planted clustering is itself unfair (balance 0.150), so reaching the floor necessarily moves vertices away from it. The price of fairness of Stage 2 is at most 3.7% over the twelve networks.
 
 ### Diffusion Time
 
@@ -226,7 +226,7 @@ The diffusion time $t^\star$ is selected by ParPIC's entropy criterion on the un
 
 > ![Effect of the diffusion time](assets/images/diffusion_time.png)
 
-## 🔬 Sensitivity Analysis
+## Sensitivity Analysis
 
 Each hyperparameter is varied one at a time ($n = 3{,}000$, seed 42; Appendix E.4; scripts in [`experiments/`](experiments/)). In every figure, the **top row** shows the balance of Fair ParPIC (blue) and unconstrained ParPIC with $k$-means (orange) against the floor (dotted) and ceiling (solid), and the **bottom row** shows the price of fairness with (green) and without (red) the projection. All 176 fair-assignment runs met the floor, and for $\gamma < 1$ the projection lowered the price of fairness in 69 of the 78 settings where the two prices differ.
 
@@ -260,22 +260,3 @@ With small groups ($G \ge 4$), unconstrained clustering leaves at least one clus
 
 > ![Effect of the number of groups](assets/images/sensitivity_groups.png)
 
-<!--## 📜 Citation
-
-If you find this code useful in your research, please consider citing our paper:
-
-```bibtex
-@inproceedings{fairparpic2027,
-  title={Fair ParPIC: Fair Power-Iteration Clustering on Directed Graphs},
-  author={Anonymous},
-  booktitle={Submitted to the International Conference on Artificial Intelligence and Statistics (AISTATS)},
-  year={2027}
-}
-```
--->
-
-## 📜 Citation
-
-The paper is currently under double-blind review; citation details will be added after the review process.
-
-This work builds on ParPIC: G. Debaussart-Joniec, H. Sevi, M. Jonckheere and A. Kalogeratos, *Parametrized Power-Iteration Clustering for Directed Graphs*, ICML 2026 (arXiv:2210.00310).
