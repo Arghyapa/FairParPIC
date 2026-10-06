@@ -1,22 +1,4 @@
-"""Real-data experiment of the paper (Section 6, Tables 2 and 3).
-
-For each dataset and seed it runs, on one shared graph, operator, diffusion
-time and random start:
-
-    ParPIC        + k-means          (unconstrained baseline)
-    FP-ParPIC     + k-means          (Stage 1 alone)
-    ParPIC        + fair assignment  (ablation: Stage 2 without the projection)
-    Fair ParPIC   = FP-ParPIC + fair assignment   (Algorithm 1)
-
-and reports balance, number of substantive clusters, price of fairness,
-silhouette score, max |F^T Z| and the certified optimality gap.
-
-Examples
---------
-    python main_pipeline.py --dataset census
-    python main_pipeline.py --dataset all --k 7 --seeds 42 0 1 2 3
-    python main_pipeline.py --dataset bank --delta 0.1 --solver milp
-"""
+"""Real-data experiment of the paper (Section 6, Tables 2 and 3)."""
 
 import argparse
 import json
