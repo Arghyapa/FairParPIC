@@ -2,15 +2,6 @@
 Appendix E.3, Table S3 -- numerical check of Theorems 1 and 2 on the three
 datasets (n = 3000, seed 42, defaults of the comparison): full spectra of
 P_(nu) and of the compression T_pi = Pi_pi P_(nu) restricted to N_F.
-
-Reports: self-adjointness defects, interlacing (Eq. 9), eigenvalue gaps, the
-number of surviving modes at every time t <= 40 and threshold eps
-(Theorem 2(c)), and the diffusion-distance identity (Eq. 10) for the projected
-operator K_pi = Pi_pi P_(nu) Pi_pi at t*.
-
-Uses dense eigendecompositions (n x n), so it is meant for n = 3000.
-Needs the CSV files in data/ (or in $DATA_DIR); run from the repository root.
-DATASET=Diabetes,Bank runs a subset.   Output: results/spectrum.json
 """
 import json
 import os
