@@ -1,27 +1,6 @@
 """
 Appendix E.3, Fig. S1 -- behavior of the projected iteration as the
 diffusion time changes.
-
-ParPIC selects the diffusion time t* at the knee of the entropy of the
-UNPROJECTED operator P. FP-ParPIC iterates T_pi = Pi_pi P but keeps
-that t*. This experiment runs both iterations for t = 1, ..., 40 from the
-same start and records, at each checkpoint t:
-
-  effective rank   exp(entropy of the normalized squared singular values of
-                   the centered embedding): how many modes are still alive.
-                   If the projection left the time scales of the diffusion
-                   unchanged, the two curves coincide.
-  balance          ParPIC + k-means, and Fair ParPIC (projection + fair
-                   assignment, delta = 0.05, k = 7)
-  price of fairness of Fair ParPIC and of ParPIC + fair assignment
-  ARI to t*        adjusted Rand index between the Fair ParPIC clustering at
-                   t and the one at t* (stability around the selected time)
-
-Fully self-contained. One run per setting (seed 42, n = 3000). Needs the
-CSV files in data/ (or in $DATA_DIR); run from the repository root.
-Run one dataset with  DATASET=Census python experiments/experiment_diffusion_time.py
-(default: all three). Outputs results/sweep_time_<dataset>.json and, when all
-three exist, figures/fig_time.pdf/.png
 """
 
 import json
