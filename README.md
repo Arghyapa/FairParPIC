@@ -31,7 +31,7 @@ $$ Z^{(\tau)} = \Pi_\pi\, P_{(\nu)}\, Z^{(\tau-1)}, \qquad \Pi_\pi = I_n - D_\pi
 
    This enforces $F^\top Z = 0$ exactly at every iterate, i.e., **centroid parity**: all groups have the same mean in the embedding.
 
-5. **Stage 2 — Fair assignment.** Centroid parity does *not* imply balanced clusters (fairness can be lost in the final $k$-means step), so $k$-means is replaced by an alternating fair assignment that, for fixed centers $\mu_c$, solves
+5. **Stage 2 — Fair assignment.** Centroid parity does *not* imply balanced clusters (fairness can be lost in the final k-means step), so k-means is replaced by an alternating fair assignment that, for fixed centers $\mu_c$, solves
 
 $$ (\mathrm{P}_\delta):\ \min_{x \in \{0,1\}^{n\times k}} J(x,\mu) = \sum_{i,c} x_{ic}\|z_i-\mu_c\|^2 \ \ \text{s.t.}\ \ \sum_c x_{ic}=1,\ \ (1-\delta)\alpha_g \le r_g(C_c) \le \min\Big(1, \frac{\alpha_g}{1-\delta}\Big),\ \ |C_c|\ge 1,$$
 
