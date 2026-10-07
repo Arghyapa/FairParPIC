@@ -15,11 +15,11 @@ Fair ParPIC is a two-stage fair clustering method for **directed graphs** with p
 
 ## Overview
 
-Unconstrained clustering has no incentive to avoid clusters composed almost entirely of one group whenever group membership is correlated with the similarity structure. Fair spectral methods address this on **undirected** graphs, but many similarity graphs are naturally **directed** (in a $k_{nn}$-NN graph, "$j$ is among $i$'s nearest neighbors" is not symmetric; citations and hyperlinks are directed by nature).
+Unconstrained clustering has no incentive to avoid clusters composed almost entirely of one group whenever group membership is correlated with the similarity structure. Fair spectral methods address this on **undirected** graphs, but many similarity graphs are naturally **directed** (in a $k_{nn}$-NN graph, $j$ is among $i$'s nearest neighbors, which is not symmetric; citations and hyperlinks are directed by nature).
 
 Fair ParPIC works as follows:
 
-1. Build the directed $k_{\mathrm{nn}}$-NN digraph (or take a given digraph $W$) and its natural random walk $P = D_{\mathrm{out}}^{-1}W$.
+1. Build the directed $k_{nn}$-NN digraph (or take a given digraph $W$) and its natural random walk $P = D_{out}^{-1}W$.
 
 2. Turn it into ParPIC's reversible **P-RW operator** $P_{(\nu)} = (D_\nu + D_\xi)^{-1}(D_\nu P + P^\top D_\nu)$, with the degree-based vertex measure $\nu_\gamma$ and $\xi = P^\top\nu$. It is reversible with respect to $\pi = \pi_{(\nu)} = (\nu+\xi)/\mathbf{1}^\top(\nu+\xi)$, i.e. self-adjoint in the inner product $\langle u, v\rangle_\pi = u^\top D_\pi v$.
 
