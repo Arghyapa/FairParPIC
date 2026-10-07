@@ -105,14 +105,8 @@ python main_pipeline.py --dataset census --k 7 --n-neighbors 10
 python main_pipeline.py --dataset bank --delta 0.1 --solver milp     # other tolerance / exact MILP
 ```
 
-**Reproduce the appendix experiments** (Tables S1 and S3, Figs. S1–S6; see [`experiments/README.md`](experiments/README.md)):
 
-```bash
-python experiments/experiment_delta.py                    # Fig. S2 -> results/, figures/
-DATASET=Diabetes python experiments/experiment_gamma.py   # one dataset only
-python experiments/experiment_scale.py Census             # Table S1, one dataset
 ```
-
 **Use Fair ParPIC on your own data:**
 
 ```python
