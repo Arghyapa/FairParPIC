@@ -1,28 +1,5 @@
 """Stage 2 of Fair ParPIC: the fair assignment problem (P_delta) and the
 alternating fair k-means.
-
-For fixed centers mu_1..mu_k, (P_delta) is (Eqs. 13-16 of the paper)
-
-    min_x  J(x, mu) = sum_{i,c} x_ic ||z_i - mu_c||^2
-    s.t.   sum_c x_ic = 1                                        for every vertex i
-           r_lo_g |C_c| <= |C_c cap S_g| <= r_hi_g |C_c|          for every c, g
-           |C_c| >= 1                                             for every c
-           x_ic in {0, 1}
-
-with the share bounds r_lo_g = (1 - delta) alpha_g and
-r_hi_g = min(1, alpha_g / (1 - delta)) (written underline-r_g and overline-r_g
-in the paper). Every feasible solution satisfies
-(1 - delta) alpha_min <= balance <= alpha_min (Theorem 3), so fairness never
-depends on how exactly (P_delta) is solved.
-
-Two solvers are provided:
-
-* ``"decomposition"`` (default, Section 5.2 of the paper): LP relaxation ->
-  integer rounding (Q) of the G x k group counts n_gc -> one transportation
-  problem per group. The share bounds hold exactly and (J(x, mu) - LB) / LB is
-  a certified bound on the relative sub-optimality (Proposition 6).
-* ``"milp"``: the full mixed-integer program solved by HiGHS, with a relative
-  optimality gap of 0.5%. Exact but slow beyond a few thousand vertices.
 """
 
 import numpy as np
