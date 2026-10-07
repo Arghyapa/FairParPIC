@@ -1,53 +1,5 @@
 """
 Appendix E.4.5, Fig. S6 and Table S4 -- number of protected groups G (Census).
-
-The features, the n = 3000 sample, the k_nn graph, the P-RW operator, the
-diffusion time and the random start are held fixed; only the partition into
-protected groups changes. So any change in the results comes from G (and
-the group proportions alpha), not from the data.
-
-Two views:
-  (a) Race, nested coarsening   G = 2, 3, 4, 5
-        2: White | Non-White
-        3: White | Black | Other (API + Amer-Indian + Other)
-        4: White | Black | Asian-Pac-Islander | Other (Amer-Indian + Other)
-        5: all five race categories
-  (b) Different sensitive attributes
-        Gender            G = 2
-        Race              G = 5
-        Marital status    G = 6
-        Gender x Race     G = 8  (race with 4 levels as in (a), crossed with gender)
-
-Feasibility. Fair assignment with lower bounds (1-delta)*alpha_g needs every
-group to have at least k members (n_g >= k). At n = 3000 two cells are
-smaller than k = 7 and are merged with their nearest category:
-  * Married-AF-spouse (3 rows) -> Married-civ-spouse (both: married, spouse
-    present), giving 6 marital groups;
-  * Female x Amer-Indian-Eskimo (6 rows) -> race "Other" is merged with
-    Amer-Indian-Eskimo before crossing with gender, giving 8 groups.
-
-n_g >= k is necessary but not sufficient. Before clustering, the script
-solves the integer count problem alone (does ANY k-clustering with balance
->= (1-delta)*alpha_min exist?). Gender x Race fails this test at
-delta = 0.05: its 13-member group Female|Other must appear in every
-cluster, a cluster holding exactly one of them has 219-243 points, and no
-integer count of the 34-member group Female|Asian-Pac-Islander fits that
-size (2 needs 168-186, 3 needs 252-279). So every cluster needs two of the
-13 -- impossible. For such a grouping the script uses the smallest delta in
-DELTA_GRID that is feasible and records it ("delta" in the JSON).
-
-The sample is the gender-stratified Census sample used in every other
-experiment, so the Gender row reproduces the main results.
-
-Fully self-contained: no imports from other project files. Runs as a script
-(python experiments/experiment_groups.py, from the repository root) or pasted
-into one Jupyter cell. Needs uci_census.csv in data/ (or in $DATA_DIR).
-
-One run per setting (seed 42, n = 3000, k = 7, delta = 0.05, k_nn = 10,
-gamma = 0.5).
-Outputs:
-  results/groups_census.json
-  figures/fig_groups.pdf/.png
 """
 
 import json
