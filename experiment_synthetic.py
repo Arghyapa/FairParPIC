@@ -4,31 +4,6 @@ Synthetic, naturally directed networks with weak-to-strong group signal
 with k-means) and Fair ParPIC (Algorithm 1), all with the pi-orthogonal
 projector Pi_pi of the paper.
 
-Every network is a directed stochastic block model (no k_nn-NN graph, no
-features). Every vertex receives a distinct arrival time, and the edge i -> j
-is present independently with probability (Eq. S23)
-
-    p(i -> j) = min{1, sigma * beta(i, j) * o(i, j) * rho(j)}
-
-    block factor        beta(i, j) = p_cl(i, j) * (1 + eta)  if i, j are in the same group
-                                     p_cl(i, j) * (1 - eta)  otherwise,
-                        p_cl(i, j) = p_in  = 0.030 if i, j are in the same planted cluster
-                                     p_out = 0.006 otherwise;
-    orientation factor  o(i, j)    = 2 p_b if j arrived before i, 2 (1 - p_b) otherwise,
-                        so a fraction p_b of the edge mass points from later
-                        to earlier vertices, as citations do;
-    popularity factor   rho(j) > 0 with mean one;
-    scale factor        sigma = 3000 / n keeps the expected degree independent of n.
-
-Self-loops are excluded, and a vertex without outgoing edges is linked to one
-random vertex of its cluster.
-
-The GROUP SIGNAL eta in [0, 1) is the only thing that changes within a network
-type: eta = 0 means the protected groups play no role in the links; as eta
-grows, vertices link preferentially inside their own group, and for
-eta > 2/3 a same-group link ACROSS clusters is more likely than a cross-group
-link INSIDE a cluster (the groups become the dominant community structure).
-
 Three network types:
   A  "citation":   n = 10000, 5 equal clusters, 2 groups (30/70) with the
      population shares in every cluster (the planted clustering is fair);
@@ -45,9 +20,6 @@ For each network: balance and ARI to the planted clusters of ParPIC + k-means,
 FP-ParPIC + k-means and Fair ParPIC, and the price of fairness of Stage 2.
 k = number of planted clusters, delta = 0.05, gamma = 0.5, d = ceil(sqrt(n)),
 t* from the entropy criterion. One run per network (seed 42).
-
-Run a subset with   TYPES=A,B LEVELS=none,strong python experiment_synthetic.py
-Output: results/synthetic_suite.json
 """
 
 import json
@@ -63,9 +35,7 @@ from src.fair_assignment import fair_kmeans
 from src.fair_parpic import parpic_embeddings
 from src.metrics import balance_objective, wcss
 
-# ======================================================================
-# Settings
-# ======================================================================
+
 SEED = 42
 GAMMA = 0.5
 DELTA = 0.05
@@ -88,9 +58,8 @@ NETWORKS = {
 }
 
 
-# ======================================================================
 # Directed network generator (Eq. S23)
-# ======================================================================
+
 def directed_network(n, cluster_shares, group_shares, p_b, pareto, eta):
     rng = np.random.default_rng(SEED)
     sizes = np.round(np.array(cluster_shares) * n).astype(int)
@@ -130,9 +99,8 @@ def directed_network(n, cluster_shares, group_shares, p_b, pareto, eta):
     return sp.csr_matrix(W), cluster, group
 
 
-# ======================================================================
 # One network: ParPIC, FP-ParPIC and Fair ParPIC on a shared embedding run
-# ======================================================================
+
 def run_network(spec, eta):
     W, cluster, group = directed_network(eta=eta, **spec)
     n = W.shape[0]
