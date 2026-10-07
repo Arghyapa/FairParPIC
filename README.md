@@ -15,7 +15,7 @@ Fair ParPIC is a two-stage fair clustering method for **directed graphs** with p
 
 ## Overview
 
-Unconstrained clustering has no incentive to avoid clusters composed almost entirely of one group whenever group membership is correlated with the similarity structure. Fair spectral methods address this on **undirected** graphs, but many similarity graphs are naturally **directed** (in a $k_{nn}$-NN graph, $j$ is among $i$'s nearest neighbors, which is not symmetric; citations and hyperlinks are directed by nature).
+Unconstrained clustering has no incentive to avoid clusters composed almost entirely of one group whenever group membership is correlated with the similarity structure. Fair spectral methods address this on **undirected** graphs, but many similarity graphs are naturally **directed**.
 
 Fair ParPIC works as follows:
 
