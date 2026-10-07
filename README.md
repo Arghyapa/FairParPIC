@@ -88,7 +88,7 @@ cd FairParPIC
 pip install -r requirements.txt
 ```
 
-The dependencies are NumPy, SciPy (≥ 1.9, whose `milp` wraps the HiGHS solver), scikit-learn and pandas, plus Matplotlib for the figures of the appendix experiments. Download the three real datasets into `data/`
+The dependencies are NumPy, SciPy (≥ 1.9, whose `milp` wraps the HiGHS solver), scikit-learn and pandas, plus Matplotlib for the figures of the appendix experiments. Download the three real datasets into `data`
 
 ## Usage
 
