@@ -1,20 +1,5 @@
 """
 Appendix E.4.1, Fig. S2 -- effect of the fairness tolerance delta on Fair ParPIC.
-
-Fully self-contained: no imports from other project files. Runs as a script
-(python3 experiment_delta.py) or pasted into a single Jupyter cell.
-Needs diabetic_data.csv, uci_census.csv and bank-full.csv in data/ (or in
-$DATA_DIR); run from the repository root. DATASET=Diabetes,Bank runs a
-subset of the datasets.
-
-For each dataset (one run: seed 42, n = 3000, k = 7):
-  * Stage 1 builds the ParPIC embedding and the FP-ParPIC
-    embedding once (neither depends on delta);
-  * for every delta, both embeddings are clustered with fair assignment
-    (Stage 2) and, for reference, with plain k-means.
-Outputs:
-  results/sweep_delta.json   raw numbers
-  figures/fig_delta.pdf/.png two-row figure (balance, price of fairness)
 """
 
 import json
@@ -86,9 +71,6 @@ def load_dataset(csv_path, sensitive_col, valid_categories, sep):
     return X, group_ids, len(groups)
 
 
-# ======================================================================
-# 2. Stage 1: ParPIC and FP-ParPIC embeddings
-# ======================================================================
 def find_knee(x, y):
     """Point of maximum distance to the chord joining the curve's endpoints."""
     x, y = np.asarray(x, float), np.asarray(y, float)
