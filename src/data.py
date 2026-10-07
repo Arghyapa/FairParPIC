@@ -1,8 +1,4 @@
 """Loading and cleaning of the three real datasets of the paper.
-
-Recipe (Section 6): drop columns with more than 40% missing values, keep the
-numeric non-sensitive columns, median-impute, standardize, and draw a
-subsample stratified by the sensitive attribute.
 """
 
 import os
