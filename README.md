@@ -73,10 +73,9 @@ The codebase is organized as follows:
 │   ├── fair_assignment.py    # Fair assignment (P_delta): decomposition & MILP solvers, fair k-means
 │   ├── model_selection.py    # Elbow selection of k_nn and k
 │   ├── metrics.py            # Price of fairness, silhouette, substantive clusters
-│   └── data.py               # Loading / cleaning of Diabetes, UCI Census and Bank Marketing                           
-└── assets/
-    ├── figures/              # The paper's figures (vector PDF)
-    └── images/               # PNG renderings used in this README
+│   └── data.py               # Loading/cleaning of Diabetes, UCI Census and Bank Marketing                           
+└── assets/             
+    └── images/               # images 
 ```
 
 ## Installation
@@ -89,7 +88,7 @@ cd FairParPIC
 pip install -r requirements.txt
 ```
 
-The dependencies are NumPy, SciPy (≥ 1.9, whose `milp` wraps the HiGHS solver), scikit-learn and pandas, plus Matplotlib for the figures of the appendix experiments. Download the three real datasets into `data/` as described in [`data/README.md`](data/README.md).
+The dependencies are NumPy, SciPy (≥ 1.9, whose `milp` wraps the HiGHS solver), scikit-learn and pandas, plus Matplotlib for the figures of the appendix experiments. Download the three real datasets into `data/`
 
 ## Usage
 
@@ -104,13 +103,6 @@ bash run_all.sh
 ```bash
 python main_pipeline.py --dataset census --k 7 --n-neighbors 10
 python main_pipeline.py --dataset bank --delta 0.1 --solver milp     # other tolerance / exact MILP
-```
-
-**Run the synthetic directed-network experiment** (a subset via environment variables):
-
-```bash
-python experiment_synthetic.py
-TYPES=A LEVELS=none,strong python experiment_synthetic.py
 ```
 
 **Reproduce the appendix experiments** (Tables S1 and S3, Figs. S1–S6; see [`experiments/README.md`](experiments/README.md)):
