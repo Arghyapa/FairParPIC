@@ -5,21 +5,6 @@ Appendix E.1, Table S1 -- Stage 1 at larger scale: ParPIC vs. FP-ParPIC
     Diabetes  stratified subsample of 70,000 vertices   (gender, G = 2)
     Census    full dataset                               (gender, G = 2)
     Bank      full dataset                               (marital, G = 3)
-
-with k_nn = 10, k = 10, gamma = 0.5, d = ceil(sqrt(n)), t_max = 40.
-One run per dataset (seed 42). Both methods share the graph, the operator,
-the diffusion time and the random start; they differ only in the projection
-Pi_pi = I - D_pi^-1 F (F^T D_pi^-1 F)^-1 F^T (orthogonal in the pi inner product).
-
-Reported per dataset: n, G, alpha_min, t*, and for each method the balance,
-the number of substantive clusters (>= 1% of n), the largest distance between
-two group centroids in the embedding, max |F^T Z|, and the time spent in the
-power iteration (to show what the projection adds).
-
-Fully self-contained. Needs the CSV files in data/ (or in $DATA_DIR); run from
-the repository root. Run one dataset with
-    python experiments/experiment_scale.py Bank
-Output: results/scale_<dataset>.json
 """
 
 import json
