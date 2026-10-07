@@ -1,30 +1,6 @@
 """
 Appendix E.4.4, Fig. S5 -- robustness to the vertex-measure parameter gamma.
 
-nu_gamma = gamma * d_in + (1 - gamma) * d_out  (normalized degrees) is the
-main design parameter of ParPIC's P-RW operator. gamma = 0 uses only
-out-degrees (uniform on a k_nn digraph), gamma = 1 only in-degrees,
-gamma = 0.5 (the default everywhere else) weights both equally.
-
-Fully self-contained: no imports from other project files. Runs as a script
-(python3 experiment_gamma.py) or pasted into a single Jupyter cell.
-Needs diabetic_data.csv, uci_census.csv and bank-full.csv in data/ (or in
-$DATA_DIR); run from the repository root. DATASET=Diabetes,Bank runs a
-subset of the datasets.
-
-One run per setting (seed 42, n = 3000, k = 7, delta = 0.05, elbow k_nn).
-The embeddings are recomputed for every gamma; both embeddings (ParPIC,
-FP-ParPIC) are clustered with fair assignment and with plain k-means. The
-ratio max(pi) / min(pi) of the stationary measure is recorded for every gamma.
-
-gamma = 1 is the boundary case of Appendix E.4.4: the vertex measure vanishes
-on vertices with zero in-degree (the implementation floors it at 1e-12), the
-projection degenerates, and the method must not be used there. It is run for
-the discussion in the text and left out of the figure, which shows gamma < 1
-as equally spaced categories.
-Outputs:
-  results/sweep_gamma.json
-  figures/fig_gamma.pdf/.png
 """
 
 import json
