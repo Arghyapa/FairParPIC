@@ -19,7 +19,7 @@ Unconstrained clustering has no incentive to avoid clusters composed almost enti
 
 Fair ParPIC works as follows:
 
-1. Build the directed $k_{nn}$-NN digraph (or take a given digraph $W$) and its natural random walk $P = D_{out}^{-1}W$.
+1. Build the directed $k_{nn}$-NN digraph and its natural random walk $P = D_{out}^{-1}W$.
 
 2. Turn it into ParPIC's reversible **P-RW operator** $P_{(\nu)} = (D_\nu + D_\xi)^{-1}(D_\nu P + P^\top D_\nu)$, with the degree-based vertex measure $\nu_\gamma$ and $\xi = P^\top\nu$. It is reversible with respect to $\pi = \pi_{(\nu)} = (\nu+\xi)/\mathbf{1}^\top(\nu+\xi)$, i.e. self-adjoint in the inner product $\langle u, v\rangle_\pi = u^\top D_\pi v$.
 
@@ -73,9 +73,9 @@ The codebase is organized as follows:
 │   ├── fair_assignment.py    # Fair assignment (P_delta): decomposition & MILP solvers, fair k-means
 │   ├── model_selection.py    # Elbow selection of k_nn and k
 │   ├── metrics.py            # Price of fairness, silhouette, substantive clusters
-│   └── data.py               # Loading/cleaning of Diabetes, UCI Census and Bank Marketing                           
+│   └── data.py               # Loading Diabetes, UCI Census and Bank Marketing                           
 └── assets/             
-    └── images/               # images 
+    └── images/               # images from the paper
 ```
 
 ## Installation
