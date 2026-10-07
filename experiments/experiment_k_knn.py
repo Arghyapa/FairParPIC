@@ -1,23 +1,6 @@
 """
 Appendix E.4.2-E.4.3, Figs. S3 and S4 -- effect of the number of clusters k
 and of the number of neighbors k_nn on Fair ParPIC.
-
-Fully self-contained: no imports from other project files. Runs as a script
-(python3 experiment_k_knn.py) or pasted into a single Jupyter cell.
-Needs diabetic_data.csv, uci_census.csv and bank-full.csv in data/ (or in
-$DATA_DIR); run from the repository root. DATASET=Diabetes,Bank runs a
-subset of the datasets.
-
-One run per setting (seed 42, n = 3000, delta = 0.05).
-  * k sweep:    k in K_VALUES, k_nn fixed at its elbow value per dataset.
-    The embeddings do not depend on k, so they are computed once per dataset.
-  * k_nn sweep: k_nn in KNN_VALUES, k fixed at 7. The embeddings are
-    recomputed for every k_nn.
-For each setting both embeddings (ParPIC, FP-ParPIC) are
-clustered with fair assignment and with plain k-means.
-Outputs:
-  results/sweep_k.json, results/sweep_knn.json
-  figures/fig_k.pdf/.png, figures/fig_knn.pdf/.png
 """
 
 import json
