@@ -48,7 +48,7 @@ Below is the full pipeline on a small synthetic example ($n = 180$, $k = 3$, $G 
 
 * **The discretization gap:** We prove that centroid parity of the embedding does not transfer to the $k$-means labels; the same gap affects fair spectral methods such as FairSC and FairDen.
 
-* **Certified fair labels:** every feasible assignment satisfies $(1-\delta)\alpha_{\min} \le \mathrm{balance} \le \alpha_{\min}$ (Theorem 3); we also prove feasibility conditions, minimal intervention (the assignment departs from $k$-means only where a share bound would be violated), and monotone convergence of the alternation.
+* **Certified fair labels:** Every feasible assignment satisfies $(1-\delta)\alpha_{\min} \le \mathrm{balance} \le \alpha_{\min}$ (Theorem 3); we also prove feasibility conditions, minimal intervention (the assignment departs from $k$-means only where a share bound would be violated), and monotone convergence of the alternation.
 
 * **Fairness made cheaper:** the projection lowers the *price of fairness* (relative increase in within-cluster sum of squares) of the exact assignment, e.g. from 2.1% to 0.8% on Bank Marketing.
 
