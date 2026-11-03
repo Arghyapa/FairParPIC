@@ -44,7 +44,7 @@ Below is the full pipeline on a small synthetic example ($n = 180$, $k = 3$, $G 
 
 ## Key Contributions
 
-* **Fairness inside an eigendecomposition-free iteration:** the $\pi$-orthogonal projection is applied at every power-iteration step and the iterates satisfy $F^\top Z = 0$ to machine precision (Proposition 1). They form a power iteration of $T_\pi = \Pi_\pi P_{(\nu)}|_{\mathcal{N}_F}$, a self-adjoint compression of $P_{(\nu)}$ whose spectrum interlaces that of $P_{(\nu)}$ (Theorem 1), so the diffusion geometry is preserved and ParPIC's diffusion time can be reused (Theorem 2).
+* **Fairness inside an eigendecomposition-free iteration:** The $\pi$-orthogonal projection is applied at every power-iteration step and the iterates satisfy $F^\top Z = 0$ to machine precision (Proposition 1). They form a power iteration of $T_\pi = \Pi_\pi P_{(\nu)}|_{\mathcal{N}_F}$, a self-adjoint compression of $P_{(\nu)}$ whose spectrum interlaces that of $P_{(\nu)}$ (Theorem 1), so the diffusion geometry is preserved and ParPIC's diffusion time can be reused (Theorem 2).
 
 * **The discretization gap:** We prove that centroid parity of the embedding does not transfer to the $k$-means labels; the same gap affects fair spectral methods such as FairSC and FairDen.
 
